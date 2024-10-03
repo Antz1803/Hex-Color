@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MancillaHexColor.MainPage">
+
+    <ContentPage.Resources>
+        <Color x:Key="Primary">red</Color>
+        <Color x:Key="Secondary">green</Color>
+        <Color x:Key="Tertiary">blue</Color>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <!-- Background color will be updated dynamically in code-behind -->
+        <BoxView x:Name="backgroundBox" Color="#84a59d" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
+
+        <WebView x:Name="gif"
+             AbsoluteLayout.LayoutBounds="0,0,1,0.5"
+             AbsoluteLayout.LayoutFlags="All"
+             HeightRequest="300"
+             WidthRequest="300"
+             VerticalOptions="Center"
+             HorizontalOptions="Center"
+             IsVisible="false" 
+             BackgroundColor="Transparent" Margin="0,-195,0,0"/>
+
+        <WebView x:Name="gif1"
+             AbsoluteLayout.LayoutBounds="0,0,1,0.5"
+             AbsoluteLayout.LayoutFlags="All"
+             HeightRequest="300"
+             WidthRequest="300"
+             VerticalOptions="Center"
+             HorizontalOptions="Center"
+             IsVisible="false" 
+             BackgroundColor="Transparent" Margin="0,-140,0,0"/>
+
+        <WebView x:Name="gif2"
+             AbsoluteLayout.LayoutBounds="0,0,1,0.5"
+             AbsoluteLayout.LayoutFlags="All"
+             HeightRequest="240"
+             WidthRequest="240"
+             VerticalOptions="Center"
+             HorizontalOptions="Center"
+             IsVisible="false" 
+             BackgroundColor="Transparent" Margin="0,-147,0,0"/>
+
+        <WebView x:Name="gif3"
+              AbsoluteLayout.LayoutBounds="0,0,1,0.5"
+              AbsoluteLayout.LayoutFlags="All"
+              HeightRequest="250"
+              WidthRequest="250"
+              VerticalOptions="Center"
+              HorizontalOptions="Center"
+              IsVisible="false" 
+              BackgroundColor="Transparent" Margin="0,-163,0,-15"/>
+        <Label FontAttributes="Italic"
+             FontSize="Large"
+             FontFamily="fantasy"
+               TextColor="Black"
+             HorizontalOptions="Center"
+             Text="@Antz" Margin="0,0,-50,65">         
+        </Label>
+        <!-- Container for the sliders and labels -->
+        <Grid x:Name="Container" AbsoluteLayout.LayoutBounds="0,0,1,1.4" AbsoluteLayout.LayoutFlags="All">
+            <Frame Margin="15,0" VerticalOptions="Center" Background="DarkGray" HeightRequest="570">
+                <Grid Margin="-16">
+                    <Image Source="medievalborder.png" Aspect="AspectFill" Margin="0" HeightRequest="555" WidthRequest="400" />
+
+                    <VerticalStackLayout Spacing="15" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Label FontAttributes="Italic"
+                           FontSize="Large"
+                           FontFamily="fantasy"
+                           TextColor="Black"
+                           HorizontalOptions="Center"
+                           Text="HexColor Generator" Margin="0,0,-50,65">
+                        </Label>
+
+                        <!-- Red Slider Section -->
+                        <StackLayout>
+                            <Label Text="Red value" HorizontalOptions="EndAndExpand" Margin="0,-50,153,0" TextColor="Black"/>
+                            <Slider x:Name="slRed"
+                                    HorizontalOptions="EndAndExpand"
+                                Maximum="255"
+                                Minimum="0"
+                                MaximumTrackColor="{StaticResource Primary}"
+                                MinimumTrackColor="{StaticResource Tertiary}"
+                                WidthRequest="263"
+                                ThumbImageSource="shieldthumb.png"                                   
+                                ValueChanged="OnSliderValueChanged" Margin="0,0,-39,0"/>
+                        </StackLayout>
+
+                        <!-- Green Slider Section -->
+                        <StackLayout>
+                            <Label Text="Green value" HorizontalOptions="EndAndExpand" Margin="0,0,139,0" TextColor="Black"/>
+                            <Slider x:Name="slGreen"
+                                    HorizontalOptions="EndAndExpand"
+                                Maximum="255"
+                                Minimum="0"
+                                MinimumTrackColor="{StaticResource Secondary}"
+                                MaximumTrackColor="{StaticResource Tertiary}"
+                                WidthRequest="263"
+                                ThumbImageSource="shieldthumb.png"
+                                ValueChanged="OnSliderValueChanged" Margin="0,0,-39,0"/>
+                        </StackLayout>
+
+                        <!-- Blue Slider Section -->
+                        <StackLayout>
+                            <Label Text="Blue value" HorizontalOptions="EndAndExpand" Margin="0,0,149,0" TextColor="Black"/>
+                            <Slider x:Name="slBlue"
+                                    HorizontalOptions="EndAndExpand"
+                                Maximum="255"
+                                Minimum="0"
+                                MaximumTrackColor="{StaticResource Secondary}"
+                                MinimumTrackColor="{StaticResource Primary}"
+                                WidthRequest="263"
+                                ThumbImageSource="shieldthumb.png"
+                                ValueChanged="OnSliderValueChanged" Margin="0,0,-39,0"/>
+                        </StackLayout>
+
+                        <!-- Label to display the hex color value -->
+                        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="clipboardicon.png" 
+                                   WidthRequest="24" 
+                                   HeightRequest="24" 
+                                   VerticalOptions="Center">    
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnCopyButtonClipboard" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label x:Name="lblHex" 
+                                   FontSize="Medium" 
+                                   HorizontalOptions="Center" 
+                                   TextColor="Black"
+                                   VerticalOptions="Center">            
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnCopyButtonClipboard" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </HorizontalStackLayout>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="btnRed"
+                                Clicked="OnRedButtonClicked"
+                                Text="RED"
+                                BackgroundColor="Red"
+                                WidthRequest="56"
+                                Grid.Column="0"
+                                TextColor="Black"
+                                Margin="25,0,10,0"/>
+
+                            <Button x:Name="btnGreen"
+                                Clicked="OnGreenButtonClicked"
+                                Text="Green"
+                                BackgroundColor="Green"
+                                WidthRequest="70"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                Margin="0,0,10,0" />
+
+                            <Button x:Name="btnBlue"
+                                Clicked="OnBlueButtonClicked"
+                                Text="BLUE"
+                                TextColor="Black"
+                                BackgroundColor="Blue"
+                                WidthRequest="65"
+                                Grid.Column="2" />
+                        </Grid>
+                        <Button Text="Random Color" 
+                                Clicked="OnRandomColorButtonClicked"
+                                VerticalOptions="End" 
+                                HorizontalOptions="Center" 
+                                Margin="0,0,-21,0" 
+                                BackgroundColor="DarkKhaki"
+                                TextColor="Black"/>           
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+        </Grid>
+    </AbsoluteLayout>
+
+</ContentPage>
